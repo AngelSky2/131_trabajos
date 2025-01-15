@@ -418,18 +418,18 @@ public class main {
     public static void main(String[] args) {
         System.out.println("====DATOS POR DEFECTO=======");
         CircularLinkedList simplecircular = new CircularLinkedList();
-        simplecircular.adiPrincipio(10);
-        simplecircular.adiFinal(20);
-        simplecircular.adiFinal(30);
-        simplecircular.adiFinal(40);
-        simplecircular.adiFinal(50);
+        simplecircular.adiPrincipio(1);
+        simplecircular.adiFinal(9);
+        simplecircular.adiFinal(7);
+        simplecircular.adiFinal(9);
+        simplecircular.adiFinal(1);
         simplecircular.display();
         DoubleCircularLinkedList doblecircular = new DoubleCircularLinkedList();
-        doblecircular.adiPrincipio(1);
-        doblecircular.adiFinal(2);
-        doblecircular.adiFinal(3);
-        doblecircular.adiFinal(4);
-        doblecircular.adiFinal(5);
+        doblecircular.adiPrincipio(10);
+        doblecircular.adiFinal(16);
+        doblecircular.adiFinal(7);
+        doblecircular.adiFinal(9);
+        doblecircular.adiFinal(1);
         doblecircular.display();
         int option;
         Scanner scanner = new Scanner(System.in);
@@ -439,7 +439,7 @@ public class main {
             printMenu();
 
             // Leer la opción del usuario
-            System.out.print("\nElige una opción (1-6): ");
+            System.out.print("\nElige una opción (1-5): ");
             option = scanner.nextInt();
 
             // Ejecutar la opción seleccionada
@@ -451,7 +451,6 @@ public class main {
                     break;
                 case 2:
                     System.out.println("EJERCICIO 2");
-                    doblecircular.display();
                     eliminaNodosPares(doblecircular);
                     System.out.println("==============================================");
                     break;
@@ -491,12 +490,11 @@ public class main {
         System.out.println("\n============================");
         System.out.println("   MENÚ TEMÁTICO PRINCIPAL   ");
         System.out.println("============================");
-        System.out.println("1. EJERCICIO 1");
-        System.out.println("2. EJERCICIO 2");
-        System.out.println("3. EJERCICIO 3");
-        System.out.println("4. EJERCICIO 4");
-        System.out.println("5. EJERCICIO 5");
-        System.out.println("6. Salir del programa");
+        System.out.println("1. Resolver: Encontrar números únicos");
+        System.out.println("2. Resolver: Calcular intersección de arreglos");
+        System.out.println("3. Explorar: Ejercicios avanzados");
+        System.out.println("4. Información: Sobre este programa");
+        System.out.println("5. Salir del programa");
         System.out.println("============================\n");
     
         

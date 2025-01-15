@@ -1,0 +1,1029 @@
+Laboratorio 09012025
+====================
+---1---
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+---2---
+import java.util.Vector;
+
+public class VectorExample {
+    public static void main(String[] args) {
+        // Crear un vector de enteros
+        Vector<Integer> numbers = new Vector<>();
+
+        // Agregar elementos al vector
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+
+        // Imprimir el vector
+        System.out.println("Vector: " + numbers);
+
+    }
+}
+
+---3---
+import java.util.Vector;
+
+public class AccessVectorElements {
+    public static void main(String[] args) {
+        // Crear un vector de cadenas
+        Vector<String> names = new Vector<>();
+        names.add("Alice");
+        names.add("Bob");
+        names.add("Charlie");
+
+        // Acceder a elementos por índice
+        System.out.println("Primer elemento: " + names.get(0));
+        System.out.println("Segundo elemento: " + names.get(1));
+
+        // Recorrer el vector usando un bucle
+        System.out.println("Todos los elementos:");
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+}
+---4---
+import java.util.Vector;
+
+public class ModifyVector {
+    public static void main(String[] args) {
+        // Crear un vector de números
+        Vector<Integer> numbers = new Vector<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+
+        // Insertar un elemento en una posición específica
+        numbers.add(1, 15); // Insertar 15 en el índice 1
+        System.out.println("Después de insertar: " + numbers);
+
+        // Eliminar un elemento por índice
+        numbers.remove(2); // Eliminar el elemento en el índice 2
+        System.out.println("Después de eliminar: " + numbers);
+
+        // Eliminar un elemento por valor
+        numbers.remove((Integer) 15); // Eliminar el número 15
+        System.out.println("Después de eliminar por valor: " + numbers);
+    }
+}
+---5---
+import java.util.Vector;
+
+public class SearchVector {
+    public static void main(String[] args) {
+        // Crear un vector de números
+        Vector<Integer> numbers = new Vector<>();
+        numbers.add(5);
+        numbers.add(10);
+        numbers.add(15);
+        numbers.add(20);
+
+        // Verificar si un elemento está en el vector
+        int searchNumber = 10;
+        if (numbers.contains(searchNumber)) {
+            System.out.println("El número " + searchNumber + " está en el vector.");
+        } else {
+            System.out.println("El número " + searchNumber + " no está en el vector.");
+        }
+
+        // Obtener el índice de un elemento
+        int index = numbers.indexOf(15);
+        System.out.println("El índice de 15 es: " + index);
+    }
+}
+---6---
+import java.util.Collections;
+import java.util.Vector;
+
+public class SortVector {
+    public static void main(String[] args) {
+        // Crear un vector de números
+        Vector<Integer> numbers = new Vector<>();
+        numbers.add(30);
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(40);
+
+        // Ordenar el vector en orden ascendente
+        Collections.sort(numbers);
+        System.out.println("Vector ordenado (ascendente): " + numbers);
+
+        // Ordenar el vector en orden descendente
+        Collections.sort(numbers, Collections.reverseOrder());
+        System.out.println("Vector ordenado (descendente): " + numbers);
+    }
+}
+---7---
+import java.util.Vector;
+
+public class VectorCapacity {
+    public static void main(String[] args) {
+        // Crear un vector con una capacidad inicial de 2
+        Vector<String> items = new Vector<>(2);
+
+        // Agregar elementos al vector
+        items.add("Manzana");
+        items.add("Banana");
+
+        // Mostrar la capacidad actual
+        System.out.println("Capacidad actual: " + items.capacity());
+
+        // Agregar más elementos para exceder la capacidad inicial
+        items.add("Cereza");
+        System.out.println("Capacidad después de agregar más elementos: " + items.capacity());
+
+        // Mostrar los elementos del vector
+        System.out.println("Elementos del vector: " + items);
+    }
+}
+---8---
+import java.util.Vector;
+
+public class VectorToArray {
+    public static void main(String[] args) {
+        // Crear un vector de números
+        Vector<Integer> numbers = new Vector<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+
+        // Convertir el vector a un array
+        Integer[] array = numbers.toArray(new Integer[0]);
+
+        // Imprimir los elementos del array
+        System.out.println("Elementos del array:");
+        for (int num : array) {
+            System.out.println(num);
+        }
+    }
+}
+---EJERCICIOS - PARTE 1
+---9---
+import java.util.Vector;
+import java.util.Random;
+
+public class VectorExecutionTime {
+    public static void main(String[] args) {
+        // Generar un vector con números aleatorios
+        int size = 100000; // Tamaño del vector
+        Vector<Integer> numbers = new Vector<>();
+        Random random = new Random();
+
+        for (int i = 0; i < size; i++) {
+            numbers.add(random.nextInt(1000)); // Números aleatorios entre 0 y 999
+        }
+
+        // Medir el tiempo de inicio
+        long startTime = System.nanoTime();
+
+        // Recorrer el vector
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num; // Calcular la suma de los elementos
+        }
+
+        // Medir el tiempo de fin
+        long endTime = System.nanoTime();
+
+        // Calcular el tiempo de ejecución
+        long duration = endTime - startTime; // Tiempo en nanosegundos
+
+        // Mostrar resultados
+        System.out.println("Suma de los elementos: " + sum);
+        System.out.println("Tiempo de ejecución: " + duration + " nanosegundos");
+        System.out.println("Tiempo de ejecución: " + (duration / 1_000_000) + " milisegundos");
+    }
+}
+---10---
+import java.util.ArrayList;
+import java.util.Random;
+
+public class ComplexityComparison {
+    public static void main(String[] args) {
+        // Tamaños de entrada
+        int[] inputSizes = {100, 1000, 10000, 100000};
+
+        // Crear encabezado de tabla
+        System.out.printf("%-10s %-15s %-15s %-15s%n", "Input Size", "O(n)", "O(n^2)", "O(log n)");
+
+        for (int size : inputSizes) {
+            // Medir complejidad O(n)
+            long startTime = System.nanoTime();
+            linearComplexity(size);
+            long durationOn = System.nanoTime() - startTime;
+
+            // Medir complejidad O(n^2)
+            startTime = System.nanoTime();
+            quadraticComplexity(size / 100); // Reducir tamaño para evitar largos tiempos de ejecución
+            long durationOn2 = System.nanoTime() - startTime;
+
+            // Medir complejidad O(log n)
+            startTime = System.nanoTime();
+            logarithmicComplexity(size);
+            long durationOlogn = System.nanoTime() - startTime;
+
+            // Mostrar resultados con 10 dígitos
+            System.out.printf("%-10d %-15s %-15s %-15s%n", 
+                              size, 
+                              String.format("%010d", durationOn / 1_000_000), 
+                              String.format("%010d", durationOn2 / 1_000_000), 
+                              String.format("%010d", durationOlogn / 1_000_000));
+        }
+    }
+
+    // O(n): Recorrido lineal de un arreglo
+    public static void linearComplexity(int size) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            numbers.add(random.nextInt(1000));
+        }
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+    }
+
+    // O(n^2): Comparación de todos los pares en un arreglo
+    public static void quadraticComplexity(int size) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < size; i++) {
+            numbers.add(random.nextInt(1000));
+        }
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                int product = numbers.get(i) * numbers.get(j); // Simula trabajo
+            }
+        }
+    }
+
+    // O(log n): Búsqueda binaria en un arreglo ordenado
+    public static void logarithmicComplexity(int size) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            numbers.add(i); // Generar un arreglo ordenado
+        }
+        int target = new Random().nextInt(size);
+
+        // Búsqueda binaria
+        int left = 0, right = size - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (numbers.get(mid) == target) {
+                return; // Elemento encontrado
+            } else if (numbers.get(mid) < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+}
+
+---11---
+public class ExecutionTimeComparison {
+    public static void main(String[] args) {
+        int n = 1000000; // Tamaño del problema
+
+        System.out.println("Comparación de tiempos para calcular la suma del 1 al " + n);
+        System.out.printf("%-30s %-15s%n", "Método", "Tiempo (ms)");
+
+        // Enfoque 1: Usando un bucle for
+        long startTime = System.nanoTime();
+        long sumFor = sumUsingForLoop(n);
+        long endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Bucle for", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 2: Usando un bucle while
+        startTime = System.nanoTime();
+        long sumWhile = sumUsingWhileLoop(n);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Bucle while", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 3: Usando un bucle do-while
+        startTime = System.nanoTime();
+        long sumDoWhile = sumUsingDoWhileLoop(n);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Bucle do-while", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 4: Usando la fórmula matemática
+        startTime = System.nanoTime();
+        long sumFormula = sumUsingFormula(n);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Fórmula matemática", (endTime - startTime) / 1_000_000);
+
+        // Validar resultados
+        if (sumFor == sumWhile && sumWhile == sumDoWhile && sumDoWhile == sumFormula) {
+            System.out.println("Todos los métodos producen el mismo resultado: " + sumFormula);
+        } else {
+            System.out.println("¡Los resultados no coinciden entre los métodos!");
+        }
+    }
+
+    // Método 1: Usando un bucle for
+    public static long sumUsingForLoop(int n) {
+        long sum = 0;
+        for (int i = 1; i <= n; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+
+    // Método 2: Usando un bucle while
+    public static long sumUsingWhileLoop(int n) {
+        long sum = 0;
+        int i = 1;
+        while (i <= n) {
+            sum += i;
+            i++;
+        }
+        return sum;
+    }
+
+    // Método 3: Usando un bucle do-while
+    public static long sumUsingDoWhileLoop(int n) {
+        long sum = 0;
+        int i = 1;
+        do {
+            sum += i;
+            i++;
+        } while (i <= n);
+        return sum;
+    }
+
+    // Método 4: Usando la fórmula matemática
+    public static long sumUsingFormula(int n) {
+        return (long) n * (n + 1) / 2; // Fórmula: n(n + 1) / 2
+    }
+}
+---12---
+import java.util.Random;
+
+public class MaxNumberComparison {
+    public static void main(String[] args) {
+        int n = 1000000; // Tamaño del arreglo
+        int[] numbers = generateRandomArray(n); // Generar un arreglo aleatorio
+
+        System.out.println("Comparación de tiempos para encontrar el mayor número en un arreglo de tamaño " + n);
+        System.out.printf("%-30s %-15s%n", "Método", "Tiempo (ms)");
+
+        // Enfoque 1: Usando un bucle for
+        long startTime = System.nanoTime();
+        int maxFor = findMaxUsingForLoop(numbers);
+        long endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Bucle for", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 2: Usando un bucle while
+        startTime = System.nanoTime();
+        int maxWhile = findMaxUsingWhileLoop(numbers);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Bucle while", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 3: Usando un bucle do-while
+        startTime = System.nanoTime();
+        int maxDoWhile = findMaxUsingDoWhileLoop(numbers);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Bucle do-while", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 4: Usando Arrays.stream() (API de Streams)
+        startTime = System.nanoTime();
+        int maxStream = findMaxUsingStream(numbers);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Streams API", (endTime - startTime) / 1_000_000);
+
+        // Validar resultados
+        if (maxFor == maxWhile && maxWhile == maxDoWhile && maxDoWhile == maxStream) {
+            System.out.println("Todos los métodos producen el mismo resultado: " + maxStream);
+        } else {
+            System.out.println("¡Los resultados no coinciden entre los métodos!");
+        }
+    }
+
+    // Método auxiliar: Generar un arreglo aleatorio
+    public static int[] generateRandomArray(int size) {
+        Random random = new Random();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextInt(1000000); // Números entre 0 y 999,999
+        }
+        return array;
+    }
+
+    // Enfoque 1: Usando un bucle for
+    public static int findMaxUsingForLoop(int[] array) {
+        int max = Integer.MIN_VALUE;
+        for (int num : array) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        return max;
+    }
+
+    // Enfoque 2: Usando un bucle while
+    public static int findMaxUsingWhileLoop(int[] array) {
+        int max = Integer.MIN_VALUE;
+        int i = 0;
+        while (i < array.length) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+            i++;
+        }
+        return max;
+    }
+
+    // Enfoque 3: Usando un bucle do-while
+    public static int findMaxUsingDoWhileLoop(int[] array) {
+        int max = Integer.MIN_VALUE;
+        int i = 0;
+        do {
+            if (array[i] > max) {
+                max = array[i];
+            }
+            i++;
+        } while (i < array.length);
+        return max;
+    }
+
+    // Enfoque 4: Usando Streams API
+    public static int findMaxUsingStream(int[] array) {
+        return java.util.Arrays.stream(array).max().orElse(Integer.MIN_VALUE);
+    }
+}
+---13---
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+public class FrequencyCountComparison {
+    public static void main(String[] args) {
+        int n = 100000; // Tamaño del arreglo
+        int[] numbers = generateRandomArray(n); // Generar un arreglo aleatorio
+
+        System.out.println("Comparación de tiempos para contar la frecuencia de números en un arreglo de tamaño " + n);
+        System.out.printf("%-30s %-15s%n", "Método", "Tiempo (ms)");
+
+        // Enfoque 1: Usando un HashMap con un bucle for
+        long startTime = System.nanoTime();
+        Map<Integer, Integer> frequencyMapFor = countFrequencyUsingForLoop(numbers);
+        long endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "HashMap con for", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 2: Usando un HashMap con un bucle for-each
+        startTime = System.nanoTime();
+        Map<Integer, Integer> frequencyMapForEach = countFrequencyUsingForEach(numbers);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "HashMap con for-each", (endTime - startTime) / 1_000_000);
+
+        // Enfoque 3: Usando Streams API
+        startTime = System.nanoTime();
+        Map<Integer, Long> frequencyMapStream = countFrequencyUsingStream(numbers);
+        endTime = System.nanoTime();
+        System.out.printf("%-30s %-15d%n", "Streams API", (endTime - startTime) / 1_000_000);
+
+        // Validar resultados
+        System.out.println("Resultados:");
+        System.out.println("Ejemplo de frecuencia con for: " + frequencyMapFor.entrySet().stream().limit(5).toList());
+        System.out.println("Ejemplo de frecuencia con for-each: " + frequencyMapForEach.entrySet().stream().limit(5).toList());
+        System.out.println("Ejemplo de frecuencia con Streams: " + frequencyMapStream.entrySet().stream().limit(5).toList());
+    }
+
+    // Método auxiliar: Generar un arreglo aleatorio
+    public static int[] generateRandomArray(int size) {
+        Random random = new Random();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = random.nextInt(100); // Números entre 0 y 99
+        }
+        return array;
+    }
+
+    // Enfoque 1: Usando un HashMap con un bucle for
+    public static Map<Integer, Integer> countFrequencyUsingForLoop(int[] array) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int i = 0; i < array.length; i++) {
+            frequencyMap.put(array[i], frequencyMap.getOrDefault(array[i], 0) + 1);
+        }
+        return frequencyMap;
+    }
+
+    // Enfoque 2: Usando un HashMap con un bucle for-each
+    public static Map<Integer, Integer> countFrequencyUsingForEach(int[] array) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : array) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+        return frequencyMap;
+    }
+
+    // Enfoque 3: Usando Streams API
+    public static Map<Integer, Long> countFrequencyUsingStream(int[] array) {
+        return java.util.Arrays.stream(array)
+                .boxed()
+                .collect(java.util.stream.Collectors.groupingBy(num -> num, java.util.stream.Collectors.counting()));
+    }
+}
+---EJERCICIOS PARTE2
+---14---
+import java.util.Scanner;
+
+public class InnovativeMenu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int option;
+
+        do {
+            // Mostrar el menú
+            printMenu();
+
+            // Leer la opción del usuario
+            System.out.print("\nSeleccione una opción (1-4): ");
+            option = scanner.nextInt();
+
+            // Ejecutar la opción seleccionada
+            switch (option) {
+                case 1:
+                    System.out.println("\n--- Opción 1: Encontrar Números Únicos ---");
+                    solveUniqueNumbers();
+                    break;
+                case 2:
+                    System.out.println("\n--- Opción 2: Calcular Intersección de Arreglos ---");
+                    solveArrayIntersection();
+                    break;
+                case 3:
+                    System.out.println("\n--- Opción 3: Mostrar Información Sobre el Programa ---");
+                    showProgramInfo();
+                    break;
+                case 4:
+                    System.out.println("\nGracias por usar el programa. ¡Hasta luego!");
+                    break;
+                default:
+                    System.out.println("\nOpción no válida. Inténtelo nuevamente.");
+            }
+        } while (option != 4);
+
+        scanner.close();
+    }
+
+    // Método para imprimir el menú de forma innovadora
+    public static void printMenu() {
+        System.out.println("\n==============================");
+        System.out.println("|     MENÚ DE EJERCICIOS     |");
+        System.out.println("==============================");
+        System.out.println("|  1. Encontrar Números Únicos |");
+        System.out.println("|  2. Calcular Intersección     |");
+        System.out.println("|  3. Información del Programa  |");
+        System.out.println("|  4. Salir                    |");
+        System.out.println("==============================");
+    }
+
+    // Resolver ejercicio: Encontrar números únicos
+    public static void solveUniqueNumbers() {
+        int[] array = {4, 5, 6, 4, 7, 8, 8, 9, 10, 5};
+        int[] uniqueNumbers = findUniqueNumbers(array);
+        System.out.println("Números únicos: ");
+        printArray(uniqueNumbers);
+    }
+
+    // Resolver ejercicio: Calcular intersección de arreglos
+    public static void solveArrayIntersection() {
+        int[] array1 = {1, 2, 3, 4, 5, 6, 7, 8};
+        int[] array2 = {5, 6, 7, 8, 9, 10};
+        int[] intersection = findArrayIntersection(array1, array2);
+        System.out.println("Intersección de arreglos: ");
+        printArray(intersection);
+    }
+
+    // Mostrar información sobre el programa
+    public static void showProgramInfo() {
+        System.out.println("\n--- Información del Programa ---");
+        System.out.println("Este programa permite resolver diferentes ejercicios interactivos:");
+        System.out.println("1. Encontrar números únicos en un arreglo.");
+        System.out.println("2. Calcular la intersección de dos arreglos.");
+        System.out.println("Diseñado para practicar estructuras de datos y operaciones básicas.");
+    }
+
+    // Método para encontrar números únicos (reutilizado)
+    public static int[] findUniqueNumbers(int[] array) {
+        int uniqueCount = 0;
+
+        // Contar números únicos
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < array.length; j++) {
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueCount++;
+            }
+        }
+
+        // Crear arreglo de números únicos
+        int[] uniqueNumbers = new int[uniqueCount];
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < array.length; j++) {
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueNumbers[index++] = array[i];
+            }
+        }
+        return uniqueNumbers;
+    }
+
+    // Método para calcular la intersección de arreglos (reutilizado)
+    public static int[] findArrayIntersection(int[] array1, int[] array2) {
+        int count = 0;
+
+        // Contar elementos comunes
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        // Crear arreglo de intersección
+        int[] intersection = new int[count];
+        int index = 0;
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    intersection[index++] = num1;
+                    break;
+                }
+            }
+        }
+        return intersection;
+    }
+
+    // Método auxiliar para imprimir arreglos
+    public static void printArray(int[] array) {
+        System.out.print("[");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+---15---
+import java.util.Scanner;
+
+public class NarrativeMenu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int option;
+
+        System.out.println("¡Bienvenido al programa interactivo de ejercicios!");
+        System.out.println("¿Estás listo para explorar las opciones disponibles?");
+
+        do {
+            // Mostrar el menú
+            showMenu();
+
+            // Leer la opción del usuario
+            System.out.print("\n¿Qué te gustaría hacer? (Ingresa un número del 1 al 4): ");
+            option = scanner.nextInt();
+
+            // Ejecutar la opción seleccionada
+            switch (option) {
+                case 1:
+                    System.out.println("\n🌟 Has elegido: Encontrar números únicos 🌟");
+                    solveUniqueNumbers();
+                    break;
+                case 2:
+                    System.out.println("\n🔗 Has elegido: Calcular la intersección de arreglos 🔗");
+                    solveArrayIntersection();
+                    break;
+                case 3:
+                    System.out.println("\n📚 Has elegido: Conocer más sobre este programa 📚");
+                    showProgramDetails();
+                    break;
+                case 4:
+                    System.out.println("\n✨ Gracias por explorar conmigo. ¡Hasta pronto! ✨");
+                    break;
+                default:
+                    System.out.println("\n⚠️ Opción no válida. Por favor, intenta nuevamente.");
+            }
+        } while (option != 4);
+
+        scanner.close();
+    }
+
+    // Método para mostrar el menú
+    public static void showMenu() {
+        System.out.println("\n======================");
+        System.out.println("🌟 MENÚ INTERACTIVO 🌟");
+        System.out.println("======================");
+        System.out.println("1. Encontrar números únicos en un arreglo.");
+        System.out.println("2. Calcular la intersección entre dos arreglos.");
+        System.out.println("3. Saber más sobre el programa.");
+        System.out.println("4. Salir del programa.");
+    }
+
+    // Resolver ejercicio: Encontrar números únicos
+    public static void solveUniqueNumbers() {
+        int[] array = {4, 5, 6, 4, 7, 8, 8, 9, 10, 5};
+        System.out.println("Trabajaremos con el siguiente arreglo: ");
+        printArray(array);
+        int[] uniqueNumbers = findUniqueNumbers(array);
+        System.out.println("Números únicos encontrados:");
+        printArray(uniqueNumbers);
+    }
+
+    // Resolver ejercicio: Calcular intersección de arreglos
+    public static void solveArrayIntersection() {
+        int[] array1 = {1, 2, 3, 4, 5, 6, 7, 8};
+        int[] array2 = {5, 6, 7, 8, 9, 10};
+        System.out.println("Trabajaremos con los siguientes arreglos:");
+        System.out.print("Arreglo 1: ");
+        printArray(array1);
+        System.out.print("Arreglo 2: ");
+        printArray(array2);
+        int[] intersection = findArrayIntersection(array1, array2);
+        System.out.println("Intersección encontrada:");
+        printArray(intersection);
+    }
+
+    // Mostrar detalles del programa
+    public static void showProgramDetails() {
+        System.out.println("\n🌟 Este programa está diseñado para:");
+        System.out.println("1. Practicar operaciones con arreglos.");
+        System.out.println("2. Explorar diferentes algoritmos para resolver problemas comunes.");
+        System.out.println("3. Comparar enfoques y analizar resultados.");
+        System.out.println("\n¡Espero que disfrutes usándolo! 🚀");
+    }
+
+    // Método para encontrar números únicos
+    public static int[] findUniqueNumbers(int[] array) {
+        int uniqueCount = 0;
+
+        // Contar números únicos
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < array.length; j++) {
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueCount++;
+            }
+        }
+
+        // Crear arreglo de números únicos
+        int[] uniqueNumbers = new int[uniqueCount];
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < array.length; j++) {
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueNumbers[index++] = array[i];
+            }
+        }
+        return uniqueNumbers;
+    }
+
+    // Método para calcular la intersección de arreglos
+    public static int[] findArrayIntersection(int[] array1, int[] array2) {
+        int count = 0;
+
+        // Contar elementos comunes
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        // Crear arreglo de intersección
+        int[] intersection = new int[count];
+        int index = 0;
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    intersection[index++] = num1;
+                    break;
+                }
+            }
+        }
+        return intersection;
+    }
+
+    // Método auxiliar para imprimir arreglos
+    public static void printArray(int[] array) {
+        System.out.print("[");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
+---16---
+import java.util.Scanner;
+
+public class ThematicMenu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int option;
+
+        do {
+            // Mostrar el menú principal
+            printMenu();
+
+            // Leer la opción del usuario
+            System.out.print("\nElige una opción (1-5): ");
+            option = scanner.nextInt();
+
+            // Ejecutar la opción seleccionada
+            switch (option) {
+                case 1:
+                    System.out.println("\n>>> RESOLVER: Encontrar números únicos <<<");
+                    solveUniqueNumbers();
+                    break;
+                case 2:
+                    System.out.println("\n>>> RESOLVER: Calcular intersección de arreglos <<<");
+                    solveArrayIntersection();
+                    break;
+                case 3:
+                    System.out.println("\n>>> EXPLORAR: Ejercicios avanzados <<<");
+                    showAdvancedExercises();
+                    break;
+                case 4:
+                    System.out.println("\n>>> INFORMACIÓN: Sobre este programa <<<");
+                    showProgramDetails();
+                    break;
+                case 5:
+                    System.out.println("\n>>> SALIR: Gracias por usar este programa. ¡Adiós! <<<");
+                    break;
+                default:
+                    System.out.println("\n[!] Opción inválida. Por favor, elige nuevamente.");
+            }
+        } while (option != 5);
+
+        scanner.close();
+    }
+
+    // Método para imprimir el menú principal
+    public static void printMenu() {
+        System.out.println("\n============================");
+        System.out.println("   MENÚ TEMÁTICO PRINCIPAL   ");
+        System.out.println("============================");
+        System.out.println("1. Resolver: Encontrar números únicos");
+        System.out.println("2. Resolver: Calcular intersección de arreglos");
+        System.out.println("3. Explorar: Ejercicios avanzados");
+        System.out.println("4. Información: Sobre este programa");
+        System.out.println("5. Salir del programa");
+        System.out.println("============================");
+    }
+
+    // Resolver ejercicio: Encontrar números únicos
+    public static void solveUniqueNumbers() {
+        int[] array = {4, 5, 6, 4, 7, 8, 8, 9, 10, 5};
+        System.out.println("Arreglo de trabajo: ");
+        printArray(array);
+        int[] uniqueNumbers = findUniqueNumbers(array);
+        System.out.println("Números únicos encontrados:");
+        printArray(uniqueNumbers);
+    }
+
+    // Resolver ejercicio: Calcular intersección de arreglos
+    public static void solveArrayIntersection() {
+        int[] array1 = {1, 2, 3, 4, 5, 6, 7, 8};
+        int[] array2 = {5, 6, 7, 8, 9, 10};
+        System.out.println("Arreglos de trabajo:");
+        System.out.print("Arreglo 1: ");
+        printArray(array1);
+        System.out.print("Arreglo 2: ");
+        printArray(array2);
+        int[] intersection = findArrayIntersection(array1, array2);
+        System.out.println("Intersección encontrada:");
+        printArray(intersection);
+    }
+
+    // Explorar ejercicios avanzados
+    public static void showAdvancedExercises() {
+        System.out.println("\n>>> Ejercicios avanzados disponibles <<<");
+        System.out.println("1. Encontrar el número más repetido en un arreglo.");
+        System.out.println("2. Calcular la unión de dos arreglos.");
+        System.out.println("3. Ordenar un arreglo en orden descendente.");
+        System.out.println("Explora estos desafíos en futuras versiones del programa.");
+    }
+
+    // Mostrar información sobre el programa
+    public static void showProgramDetails() {
+        System.out.println("\n>>> Sobre este programa <<<");
+        System.out.println("Este programa está diseñado para resolver problemas comunes con arreglos:");
+        System.out.println("- Encontrar números únicos.");
+        System.out.println("- Calcular intersecciones entre arreglos.");
+        System.out.println("- Practicar lógica de programación y estructuras básicas.");
+        System.out.println("Esperamos que lo encuentres útil para tus estudios y prácticas.");
+    }
+
+    // Método para encontrar números únicos
+    public static int[] findUniqueNumbers(int[] array) {
+        int uniqueCount = 0;
+
+        // Contar números únicos
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < array.length; j++) {
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueCount++;
+            }
+        }
+
+        // Crear arreglo de números únicos
+        int[] uniqueNumbers = new int[uniqueCount];
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+            for (int j = 0; j < array.length; j++) {
+                if (i != j && array[i] == array[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                uniqueNumbers[index++] = array[i];
+            }
+        }
+        return uniqueNumbers;
+    }
+
+    // Método para calcular la intersección de arreglos
+    public static int[] findArrayIntersection(int[] array1, int[] array2) {
+        int count = 0;
+
+        // Contar elementos comunes
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        // Crear arreglo de intersección
+        int[] intersection = new int[count];
+        int index = 0;
+        for (int num1 : array1) {
+            for (int num2 : array2) {
+                if (num1 == num2) {
+                    intersection[index++] = num1;
+                    break;
+                }
+            }
+        }
+        return intersection;
+    }
+
+    // Método auxiliar para imprimir arreglos
+    public static void printArray(int[] array) {
+        System.out.print("[");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+    }
+}
