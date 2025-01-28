@@ -184,6 +184,7 @@ public class Main {
             CircularListNode current = head;
             do {
                 String nombre = current.data;
+                nombre=nombre.toLowerCase();
                 if (nombre.contains(a) && !nombre.contains(b)) {
                     count++;
                 }

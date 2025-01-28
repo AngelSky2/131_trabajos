@@ -1,0 +1,470 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Collections;
+
+public class QueueWithLinkedList {
+
+    // Cola simple usando LinkedList
+    static class Queue {
+        LinkedList<String> queue;
+
+        // Constructor para inicializar la cola
+        public Queue() {
+            queue = new LinkedList<>();
+        }
+
+        // Operación enqueue: agregar un elemento al final de la cola
+        public void enqueue(String data) {
+            queue.addLast(data);
+            System.out.println("Elemento " + data + " agregado a la cola.");
+        }
+
+        // Operación dequeue: eliminar el primer elemento de la cola
+        public void dequeue() {
+            if (!queue.isEmpty()) {
+                String removed = queue.removeFirst();
+                System.out.println("Elemento " + removed + " eliminado de la cola.");
+            } else {
+                System.out.println("La cola está vacía. No se puede realizar dequeue.");
+            }
+        }
+
+        // Operación peek: mostrar el primer elemento sin eliminarlo
+        public void peek() {
+            if (!queue.isEmpty()) {
+                System.out.println("El frente de la cola es: " + queue.getFirst());
+            } else {
+                System.out.println("La cola está vacía.");
+            }
+        }
+
+        // Operación isEmpty: verificar si la cola está vacía
+        public void isEmpty() {
+            if (queue.isEmpty()) {
+                System.out.println("La cola está vacía.");
+            } else {
+                System.out.println("La cola no está vacía.");
+            }
+        }
+
+        // Mostrar todos los elementos de la cola de forma gráfica
+        public void display() {
+            if (!queue.isEmpty()) {
+                StringBuilder sb = new StringBuilder("[");
+
+                for (int i = 0; i < queue.size(); i++) {
+                    sb.append(queue.get(i));
+                    if (i != queue.size() - 1) {
+                        sb.append("|");
+                    }
+                }
+                sb.append("]");
+
+                System.out.println("Contenido de la cola (gráfico): " + sb.toString());
+            } else {
+                System.out.println("La cola está vacía.");
+            }
+        }
+        // Contar y mostrar las consonantes en cada nombre de la cola
+public void countAndDisplayConsonants() {
+    if (queue.isEmpty()) {
+        System.out.println("La cola está vacía.");
+        return;
+    }
+
+    int totalConsonants = 0;
+    for (String name : queue) {
+        int consonantsInName = 0;
+        // Convertir el nombre a minúsculas
+        String nameLower = name.toLowerCase();
+        for (char c : nameLower.toCharArray()) {
+            if (isConsonant(c)) {
+                consonantsInName++;
+            }
+        }
+        totalConsonants += consonantsInName;
+        System.out.println("Nombre: " + name + " tiene " + consonantsInName + " consonantes.");
+    }
+    System.out.println("Total de consonantes en la cola: " + totalConsonants);
+}
+// Método para verificar si un carácter es consonante
+private boolean isConsonant(char c) {
+    return "bcdfghjklmnpqrstvwxyz".indexOf(c) >= 0;
+}
+    public void showShortestName() {
+    if (queue.isEmpty()) {
+        System.out.println("La cola está vacía.");
+        return;
+    }
+
+    String shortestName = queue.getFirst();
+    for (String name : queue) {
+        if (name.length() < shortestName.length()) {
+            shortestName = name;
+        }
+    }
+    System.out.println("El nombre más corto en la cola es: " + shortestName + " con " + shortestName.length() + " caracteres.");
+}
+        public void sortQueue() {
+            if (queue.isEmpty()) {
+                System.out.println("La cola está vacía.");
+                return;
+            }
+
+            // Ordenar la cola alfabéticamente
+            Collections.sort(queue);
+            System.out.println("Los nombres han sido ordenados alfabéticamente.");
+        }
+            // Contar cuántas veces aparece una vocal y consonante en los nombres de la cola
+public void countVowelsAndConsonants(char vowel, char consonant) {
+    int vowelCount = 0;
+    int consonantCount = 0;
+
+    if (queue.isEmpty()) {
+        System.out.println("La cola está vacía.");
+        return;
+    }
+
+    // Recorrer todos los nombres en la cola
+    for (String name : queue) {
+        // Contar la vocal
+        vowelCount += countCharInString(name, vowel);
+        // Contar la consonante
+        consonantCount += countCharInString(name, consonant);
+    }
+
+    // Mostrar los resultados
+    System.out.println("La vocal '" + vowel + "' aparece " + vowelCount + " veces.");
+    System.out.println("La consonante '" + consonant + "' aparece " + consonantCount + " veces.");
+}
+
+// Contar cuántas veces aparece un carácter en una cadena
+private int countCharInString(String name, char ch) {
+    int count = 0;
+    for (int i = 0; i < name.length(); i++) {
+        if (name.charAt(i) == ch) {
+            count++;
+        }
+    }
+    return count;
+}
+    }
+
+    // Cola circular usando arreglo (Lista)
+    static class CircularQueue {
+        String[] queue;
+        int front, rear, size, capacity;
+
+        public CircularQueue(int capacity) {
+            this.capacity = capacity;
+            this.queue = new String[capacity];
+            this.front = this.rear = -1;
+            this.size = 0;
+        }
+
+        public void enqueue(String data) {
+            if (size == capacity) {
+                System.out.println("Error: La cola circular está llena.");
+                return;
+            }
+            if (rear == -1) { // Si la cola está vacía
+                front = rear = 0;
+            } else {
+                rear = (rear + 1) % capacity; // Círculo
+            }
+            queue[rear] = data;
+            size++;
+            System.out.println("Elemento " + data + " agregado a la cola.");
+        }
+
+        public void dequeue() {
+            if (size == 0) {
+                System.out.println("Error: La cola circular está vacía.");
+                return;
+            }
+            String removed = queue[front];
+            front = (front + 1) % capacity; // Círculo
+            size--;
+            System.out.println("Elemento " + removed + " eliminado de la cola.");
+        }
+
+        public void peek() {
+            if (size == 0) {
+                System.out.println("La cola está vacía.");
+            } else {
+                System.out.println("El frente de la cola es: " + queue[front]);
+            }
+        }
+
+        public void isEmpty() {
+            if (size == 0) {
+                System.out.println("La cola circular está vacía.");
+            } else {
+                System.out.println("La cola circular no está vacía.");
+            }
+        }
+
+        public void display() {
+            if (size == 0) {
+                System.out.println("La cola circular está vacía.");
+                return;
+            }
+            StringBuilder sb = new StringBuilder("[");
+            int i = front;
+            for (int j = 0; j < size; j++) {
+                sb.append(queue[i]);
+                if (j != size - 1) {
+                    sb.append("|");
+                }
+                i = (i + 1) % capacity;
+            }
+            sb.append("]");
+            System.out.println("Contenido de la cola circular (gráfico): " + sb.toString());
+        }
+        public void countAndDisplayConsonants() {
+    if (size == 0) {
+        System.out.println("La cola circular está vacía.");
+        return;
+    }
+
+    int totalConsonants = 0;
+    int i = front;
+    for (int j = 0; j < size; j++) {
+        String name = queue[i];
+        int consonantsInName = 0;
+        // Convertir el nombre a minúsculas
+        String nameLower = name.toLowerCase();
+        for (char c : nameLower.toCharArray()) {
+            if (isConsonant(c)) {
+                consonantsInName++;
+            }
+        }
+        totalConsonants += consonantsInName;
+        System.out.println("Nombre: " + name + " tiene " + consonantsInName + " consonantes.");
+        i = (i + 1) % capacity;
+    }
+    System.out.println("Total de consonantes en la cola: " + totalConsonants);
+}
+
+// Método para verificar si un carácter es consonante
+private boolean isConsonant(char c) {
+    return "bcdfghjklmnpqrstvwxyz".indexOf(c) >= 0;
+}
+    public void showShortestName() {
+    if (size == 0) {
+        System.out.println("La cola circular está vacía.");
+        return;
+    }
+
+    String shortestName = queue[front];
+    int i = front;
+    for (int j = 0; j < size; j++) {
+        if (queue[i].length() < shortestName.length()) {
+            shortestName = queue[i];
+        }
+        i = (i + 1) % capacity;
+    }
+    System.out.println("El nombre más corto en la cola circular es: " + shortestName + " con " + shortestName.length() + " caracteres.");
+}
+        public void sortQueue() {
+    if (size == 0) {
+        System.out.println("La cola circular está vacía.");
+        return;
+    }
+
+    // Convertir la cola a una lista para ordenarla
+    LinkedList<String> tempList = new LinkedList<>();
+    int i = front;
+    for (int j = 0; j < size; j++) {
+        tempList.add(queue[i]);
+        i = (i + 1) % capacity;
+    }
+
+    // Ordenar la lista alfabéticamente
+    Collections.sort(tempList);
+
+    // Volver a colocar los elementos ordenados en la cola circular
+    i = front;
+    for (String name : tempList) {
+        queue[i] = name;
+        i = (i + 1) % capacity;
+    }
+
+    System.out.println("Los nombres en la cola circular han sido ordenados alfabéticamente.");
+}
+                // Contar cuántas veces aparece una vocal y consonante en los nombres de la cola
+public void countVowelsAndConsonants(char vowel, char consonant) {
+    int vowelCount = 0;
+    int consonantCount = 0;
+
+    if (size == 0) {
+        System.out.println("La cola circular está vacía.");
+        return;
+    }
+
+    // Recorrer todos los nombres en la cola
+    int i = front;
+    for (int j = 0; j < size; j++) {
+        String name = queue[i];
+        // Contar la vocal
+        vowelCount += countCharInString(name, vowel);
+        // Contar la consonante
+        consonantCount += countCharInString(name, consonant);
+        i = (i + 1) % capacity;
+    }
+
+    // Mostrar los resultados
+    System.out.println("La vocal '" + vowel + "' aparece " + vowelCount + " veces.");
+    System.out.println("La consonante '" + consonant + "' aparece " + consonantCount + " veces.");
+}
+
+// Contar cuántas veces aparece un carácter en una cadena
+private int countCharInString(String name, char ch) {
+    int count = 0;
+    for (int i = 0; i < name.length(); i++) {
+        if (name.charAt(i) == ch) {
+            count++;
+        }
+    }
+    return count;
+}
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Object queue = null;
+        int option = 0; // Inicialización de la variable option
+
+        // Bucle principal donde se selecciona el tipo de cola
+        while (true) {
+            // Menú principal para elegir el tipo de cola
+            System.out.println("Selecciona el tipo de cola: ");
+            System.out.println("1. Cola simple");
+            System.out.println("2. Cola circular");
+            System.out.println("3. Salir");
+            System.out.print("Selecciona una opción: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume la nueva línea
+
+            // Salir del programa
+            if (choice == 3) {
+                System.out.println("Saliendo del programa...");
+                break;
+            }
+
+            // Crear una cola simple o circular según la elección
+            if (choice == 1) {
+                queue = new Queue();
+            } else if (choice == 2) {
+                System.out.print("Ingresa el tamaño de la cola circular: ");
+                int size = scanner.nextInt();
+                queue = new CircularQueue(size);
+            } else {
+                System.out.println("Opción no válida.");
+                continue;
+            }
+
+            // Bucle de operaciones sobre la cola seleccionada
+            do {
+                System.out.println("\n============================");
+                System.out.println("     MENÚ DE OPCIONES       ");
+                System.out.println("============================");
+                System.out.println("1. Agregar un nombre a la cola");
+                System.out.println("2. Eliminar un nombre de la cola");
+                System.out.println("3. Mostrar el primer nombre (frente)");
+                System.out.println("4. Verificar si la cola está vacía");
+                System.out.println("5. Mostrar los elementos de la cola");
+                System.out.println("6. Constantes de la cola");
+                System.out.println("7. Nombre corto de la cola");
+                System.out.println("8. Ordenar la cola");
+                System.out.println("9. Contar vocales y constantes en la cola");
+                System.out.println("10. Salir");
+                System.out.println("============================");
+
+                System.out.print("Selecciona una opción: ");
+                option = scanner.nextInt();
+                scanner.nextLine();  // Consume la nueva línea
+
+                switch (option) {
+                    case 1:
+                        System.out.print("Ingresa un nombre para agregar a la cola: ");
+                        String nameToAdd = scanner.nextLine();
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).enqueue(nameToAdd);
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).enqueue(nameToAdd);
+                        }
+                        break;
+                    case 2:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).dequeue();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).dequeue();
+                        }
+                        break;
+                    case 3:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).peek();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).peek();
+                        }
+                        break;
+                    case 4:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).isEmpty();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).isEmpty();
+                        }
+                        break;
+                    case 5:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).display();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).display();
+                        }
+                        break;
+                    case 6:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).countAndDisplayConsonants();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).countAndDisplayConsonants();
+                        }
+                        break;
+                    case 7:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).showShortestName();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).showShortestName();
+                        }
+                        break;
+                    case 8:
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).sortQueue();
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).sortQueue();
+                        }
+                        break;
+                    case 9:
+                        System.out.print("Ingresa la vocal que deseas contar: ");
+                        char vowel = scanner.nextLine().charAt(0);
+                        System.out.print("Ingresa la consonante que deseas contar: ");
+                        char consonant = scanner.nextLine().charAt(0);
+                        if (queue instanceof Queue) {
+                            ((Queue) queue).countVowelsAndConsonants(vowel, consonant);
+                        } else if (queue instanceof CircularQueue) {
+                            ((CircularQueue) queue).countVowelsAndConsonants(vowel, consonant);
+                        }
+                        break;
+
+                    case 10:
+                        // Salir del menú de operaciones y regresar al menú principal
+                        break; // Esto regresa al menú principal
+                    default:
+                        System.out.println("Opción no válida. Intenta de nuevo.");
+                }
+            } while (option != 10);
+        }
+
+        scanner.close();
+    }
+}

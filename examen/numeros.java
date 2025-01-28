@@ -208,6 +208,7 @@ public class Main {
                 System.out.println("suma de digitos menores o iguales que 5: "+men);
                 System.out.println("-----------------------------------------------------------------------------");
                 System.out.println("resultado: "+(may+men));
+                System.out.println("-----------------------------------------------------------------------------");
                 current = current.next;
             }
         }
